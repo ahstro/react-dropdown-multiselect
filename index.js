@@ -97,14 +97,14 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    const { controlClassName, menuClassName } = this.props;
+    const { className, controlClassName, menuClassName } = this.props;
     let value = (<div className='placeholder'>{this.state.selected.label}</div>);
     let menu = this.state.isOpen ? <div className={menuClassName}>{this.buildMenu()}</div> : null;
 
     let dropdownClass = classNames({
       'Dropdown': true,
       'is-open': this.state.isOpen
-    });
+    }, className);
 
     return (
       <div className={dropdownClass}>

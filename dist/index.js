@@ -139,6 +139,7 @@ var Dropdown = (function (_React$Component) {
     render: {
       value: function render() {
         var _props = this.props;
+        var className = _props.className;
         var controlClassName = _props.controlClassName;
         var menuClassName = _props.menuClassName;
 
@@ -156,7 +157,7 @@ var Dropdown = (function (_React$Component) {
         var dropdownClass = classNames({
           Dropdown: true,
           "is-open": this.state.isOpen
-        });
+        }, className);
 
         return React.createElement(
           "div",
