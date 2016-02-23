@@ -1,29 +1,31 @@
 {
-  "name": "react-dropdown",
-  "version": "0.7.2",
-  "description": "React dropdown component",
+  "name": "react-dropdown-multiselect",
+  "version": "0.8.0",
+  "description": "React multiselect dropdown component",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fraserxu/react-dropdown.git"
+    "url": "git://github.com/ahstro/react-dropdown.git"
   },
   "keywords": [
     "react",
     "react-component",
     "component",
     "dropdown",
+    "multiselect",
+    "multi",
     "select"
   ],
   "author": {
-    "name": "Fraser Xu",
-    "email": "xvfeng123@gmail.com",
-    "url": "https://fraserxu.me"
+    "name": "Anton Strömkvist",
+    "email": "hi@ahst.ro",
+    "url": "http://ahst.ro"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fraserxu/react-dropdown/issues"
+    "url": "https://github.com/ahstro/react-dropdown/issues"
   },
-  "homepage": "https://github.com/fraserxu/react-dropdown",
+  "homepage": "https://github.com/ahstro/react-dropdown-multiselect",
   "peerDependencies": {
     "react": "^0.14.0",
     "react-dom": "^0.14.0"
