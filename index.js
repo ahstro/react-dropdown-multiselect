@@ -11,7 +11,12 @@ class Dropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: props.value ? { [props.value.value]: props.value } : {},
+      selected: (props.value || []).reduce((t, c) => {
+        let fauxtotal = t;
+        return Object.assign(fauxtotal, {
+          [c.value]: c
+        });
+      }, {}),
       isOpen: false
     }
     this.mounted = true;
