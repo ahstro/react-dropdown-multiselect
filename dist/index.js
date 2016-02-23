@@ -24,7 +24,10 @@ var Dropdown = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Dropdown.prototype), "constructor", this).call(this, props);
     this.state = {
-      selected: props.value ? _defineProperty({}, props.value.value, props.value) : {},
+      selected: (props.value || []).reduce(function (t, c) {
+        var fauxtotal = t;
+        return Object.assign(fauxtotal, _defineProperty({}, c.value, c));
+      }, {}),
       isOpen: false
     };
     this.mounted = true;
