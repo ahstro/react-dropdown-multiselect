@@ -1,4 +1,16 @@
-react-dropdown
+Disclaimer
+======
+This is  a fork of [react-dropdown](https://github.com/fraserxu/react-dropdown)
+by [fraserxu](https://github.com/fraserxu), so huge thanks to them!
+I just needed multiselect for a project and forked,
+so since I don't expect anyone else to really use this,
+I'm not going to spend a lot of time rewriting the docs.
+What follows is basically just react-dropdown's README after
+a `s/react-dropdown/\0-multiselect/g`, so things are bound not
+to be accurate AT ALL.
+Might rewrite it at some point if I feel like it.
+
+react-dropdown-multiselect
 ==============
 
 [![NPM version][npm-image]][npm-url]
@@ -16,7 +28,7 @@ Simple Dropdown component for React, inspired by [react-select](https://github.c
 ### Installation
 
 ```
-$ npm install react-dropdown  --save
+$ npm install react-dropdown-multiselect  --save
 ```
 
 ### Changelog
@@ -85,7 +97,7 @@ $ cd example && npm install && npm run watch
 
 MIT | Build for [CSViz](https://csviz.org) project @[Wiredcraft](http://wiredcraft.com)
 
-[npm-image]: https://img.shields.io/npm/v/react-dropdown.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/react-dropdown
-[downloads-image]: http://img.shields.io/npm/dm/react-dropdown.svg?style=flat-square
-[downloads-url]: https://npmjs.org/package/react-dropdown
+[npm-image]: https://img.shields.io/npm/v/react-dropdown-multiselect.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/react-dropdown-multiselect
+[downloads-image]: http://img.shields.io/npm/dm/react-dropdown-multiselect.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/react-dropdown-multiselect
