@@ -2,6 +2,8 @@
 
 var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
+var _defineProperty = function (obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); };
+
 var _createClass = (function () { function defineProperties(target, props) { for (var key in props) { var prop = props[key]; prop.configurable = true; if (prop.value) prop.writable = true; } Object.defineProperties(target, props); } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 var _get = function get(object, property, receiver) { var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc && desc.writable) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
@@ -22,7 +24,7 @@ var Dropdown = (function (_React$Component) {
 
     _get(Object.getPrototypeOf(Dropdown.prototype), "constructor", this).call(this, props);
     this.state = {
-      selected: props.value || { label: props.placeholder || "Select...", value: "" },
+      selected: props.value ? _defineProperty({}, props.value.value, props.value) : {},
       isOpen: false
     };
     this.mounted = true;
@@ -42,6 +44,13 @@ var Dropdown = (function (_React$Component) {
     componentDidMount: {
       value: function componentDidMount() {
         document.addEventListener("click", this.handleDocumentClick, false);
+      }
+    },
+    componentWillUpdate: {
+      value: function componentWillUpdate(_newProps, newState) {
+        if (newState.selected !== this.state.selected && this.props.onChange) {
+          this.props.onChange(newState.selected);
+        }
       }
     },
     componentWillUnmount: {
@@ -65,31 +74,25 @@ var Dropdown = (function (_React$Component) {
     },
     setValue: {
       value: function setValue(option) {
+        var selected = this.state.selected;
+
+        var fauxselect = Object.assign({}, selected);
         var newState = {
-          selected: option,
-          isOpen: false
+          selected: Object.assign(fauxselect, _defineProperty({}, option.value, selected[option.value] ? null : option))
         };
-        this.fireChangeEvent(newState);
         this.setState(newState);
-      }
-    },
-    fireChangeEvent: {
-      value: function fireChangeEvent(newState) {
-        if (newState.selected !== this.state.selected && this.props.onChange) {
-          this.props.onChange(newState.selected);
-        }
       }
     },
     renderOption: {
       value: function renderOption(option) {
         var optionClass = classNames({
           "Dropdown-option": true,
-          "is-selected": option == this.state.selected
+          "is-selected": !!this.state.selected[option.value]
         });
 
         return React.createElement(
           "div",
-          { key: option.value, className: optionClass, onMouseDown: this.setValue.bind(this, option), onClick: this.setValue.bind(this, option) },
+          { key: option.value, className: optionClass, onClick: this.setValue.bind(this, option) },
           option.label
         );
       }
@@ -142,13 +145,17 @@ var Dropdown = (function (_React$Component) {
         var className = _props.className;
         var controlClassName = _props.controlClassName;
         var menuClassName = _props.menuClassName;
+        var placeholder = _props.placeholder;
+        var _state = this.state;
+        var selected = _state.selected;
+        var isOpen = _state.isOpen;
 
-        var value = React.createElement(
-          "div",
-          { className: "placeholder" },
-          this.state.selected.label
-        );
-        var menu = this.state.isOpen ? React.createElement(
+        var value = Object.keys(selected).map(function (key) {
+          return selected[key] && selected[key].label;
+        }).filter(function (x) {
+          return !!x;
+        }).join(", ");
+        var menu = isOpen ? React.createElement(
           "div",
           { className: menuClassName },
           this.buildMenu()
@@ -156,7 +163,7 @@ var Dropdown = (function (_React$Component) {
 
         var dropdownClass = classNames({
           Dropdown: true,
-          "is-open": this.state.isOpen
+          "is-open": isOpen
         }, className);
 
         return React.createElement(
@@ -165,7 +172,7 @@ var Dropdown = (function (_React$Component) {
           React.createElement(
             "div",
             { className: controlClassName, onMouseDown: this.handleMouseDown.bind(this), onTouchEnd: this.handleMouseDown.bind(this) },
-            value,
+            value || placeholder || "Select...",
             React.createElement("span", { className: "Dropdown-arrow" })
           ),
           menu
