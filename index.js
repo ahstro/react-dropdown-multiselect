@@ -99,7 +99,7 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    const { className, controlClassName, menuClassName, placeholder } = this.props;
+    const { className, controlClassName, menuClassName, placeholder, noPreview } = this.props;
     const { selected, isOpen } = this.state;
     let value = Object.keys(selected).map(key => selected[key] && selected[key].label).filter(x => !!x).join(', ');
     let menu = isOpen ? <div className={menuClassName}>{this.buildMenu()}</div> : null;
@@ -112,7 +112,7 @@ class Dropdown extends React.Component {
     return (
       <div className={dropdownClass}>
         <div className={controlClassName} onMouseDown={this.handleMouseDown.bind(this)} onTouchEnd={this.handleMouseDown.bind(this)}>
-          {value || placeholder || "Select..."}
+          {(!noPreview && value) || placeholder || "Select..."}
           <span className='Dropdown-arrow' />
         </div>
         {menu}

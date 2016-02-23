@@ -146,6 +146,7 @@ var Dropdown = (function (_React$Component) {
         var controlClassName = _props.controlClassName;
         var menuClassName = _props.menuClassName;
         var placeholder = _props.placeholder;
+        var noPreview = _props.noPreview;
         var _state = this.state;
         var selected = _state.selected;
         var isOpen = _state.isOpen;
@@ -172,7 +173,7 @@ var Dropdown = (function (_React$Component) {
           React.createElement(
             "div",
             { className: controlClassName, onMouseDown: this.handleMouseDown.bind(this), onTouchEnd: this.handleMouseDown.bind(this) },
-            value || placeholder || "Select...",
+            !noPreview && value || placeholder || "Select...",
             React.createElement("span", { className: "Dropdown-arrow" })
           ),
           menu
