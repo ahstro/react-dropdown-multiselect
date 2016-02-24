@@ -11,12 +11,7 @@ class Dropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: (props.value || []).reduce((t, c) => {
-        let fauxtotal = t;
-        return Object.assign(fauxtotal, {
-          [c.value]: c
-        });
-      }, {}),
+      selected: props.value || [],
       isOpen: false
     }
     this.mounted = true;
@@ -57,11 +52,11 @@ class Dropdown extends React.Component {
 
   setValue(option) {
     let { selected } = this.state;
-    let fauxselect = Object.assign({}, selected);
+    let optionIndex = selected.indexOf(option);
     let newState = {
-      selected: Object.assign(fauxselect, {
-        [option.value]: selected[option.value] ? null : option
-      })
+      selected: optionIndex === -1
+        ? selected.concat(option)
+        : selected.slice(0, optionIndex).concat(selected.slice(optionIndex + 1))
     };
     this.setState(newState);
   }
@@ -69,7 +64,7 @@ class Dropdown extends React.Component {
   renderOption (option) {
     let optionClass = classNames({
       'Dropdown-option': true,
-      'is-selected': !!this.state.selected[option.value]
+      'is-selected': this.state.selected.indexOf(option) !== -1
     });
 
     return <div key={option.value} className={optionClass} onClick={this.setValue.bind(this, option)}>{option.label}</div>
@@ -106,7 +101,7 @@ class Dropdown extends React.Component {
   render() {
     const { className, controlClassName, menuClassName, placeholder, noPreview } = this.props;
     const { selected, isOpen } = this.state;
-    let value = Object.keys(selected).map(key => selected[key] && selected[key].label).filter(x => !!x).join(', ');
+    let value = selected.map(option => option.label).join(', ');
     let menu = isOpen ? <div className={menuClassName}>{this.buildMenu()}</div> : null;
 
     let dropdownClass = classNames({
