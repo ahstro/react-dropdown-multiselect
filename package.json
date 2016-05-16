@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ahstro/react-dropdown.git"
+    "url": "git://github.com/ahstro/react-dropdown-multiselect.git"
   },
   "keywords": [
     "react",
@@ -23,7 +23,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ahstro/react-dropdown/issues"
+    "url": "https://github.com/ahstro/react-dropdown-multiselect/issues"
   },
   "homepage": "https://github.com/ahstro/react-dropdown-multiselect",
   "peerDependencies": {
